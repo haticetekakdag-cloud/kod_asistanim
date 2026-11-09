@@ -1,0 +1,26 @@
+BAŞLA
+    SABİT KRİTİK_EŞİK = 80
+    DEĞİŞKEN sensor_verisi = 0
+    DEĞİŞKEN dongu_sayaci = 1
+    DEĞİŞKEN sistem_aktif = DOĞRU
+
+    DÖNGÜ: sistem_aktif == DOĞRU OLDUĞU SÜRECE
+        // Adım 1: Sensörden anlık veriyi oku (Simülasyon için elle değer veriyoruz)
+        sensor_verisi = sensoru_oku() 
+        
+        YAZDIR "Döngü Adımı: " + dongu_sayaci + " | Sensör Sıcaklığı: " + sensor_verisi + "°C"
+
+        // Adım 2: Sınır/Eşik Denetimi
+        EĞER sensor_verisi >= KRİTİK_EŞİK İSE
+            YAZDIR "!!! UYARI: Kritik eşik aşıldı! Sistem güvenli moda geçiyor. !!!"
+            sistem_aktif = YANLIŞ // Döngüyü kıracak güvenlik tetikleyicisi
+        DEĞİLSE
+            YAZDIR "Sistem Durumu: Normal"
+        BİTTİ
+
+        // Adım 3: Sayaç güncelleme
+        dongu_sayaci = dongu_sayaci + 1
+    DÖNGÜ BİTTİ
+
+    YAZDIR "Sistem güvenli bir şekilde kapatıldı."
+BİTİR
